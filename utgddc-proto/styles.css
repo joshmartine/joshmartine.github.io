@@ -1,0 +1,35 @@
+* {
+    color: white;
+    /* background: linear-gradient(#000, #000) no-repeat center/2px 100%; */
+}
+
+.full {
+    height:100vh;
+}
+
+.display {
+    transition: all ease-in-out 1s;
+    opacity: 0;
+    padding-top: 2%;
+    padding-left: 4%;
+}
+
+.title {
+    font-size: 4em;
+    font-weight: 500;
+}
+
+.subtext {
+    font-size: 1.5em;
+    font-weight: 250;
+}
+
+@media only screen and (max-width: 768px) {
+    .title {
+        font-size: 12vw;
+    }
+
+    .subtext {
+        font-size: 4.5vw;
+    }
+}

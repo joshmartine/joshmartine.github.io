@@ -8,9 +8,9 @@
 }
 
 .display {
-    transition: all ease-in-out 1s;
+    transition: all 1s;
     opacity: 0;
-    padding-top: 2%;
+    padding-top: 3%;
     padding-left: 4%;
 }
 
@@ -26,10 +26,20 @@
 
 @media only screen and (max-width: 768px) {
     .title {
-        font-size: 12vw;
+        font-size: 6.5vw;
     }
 
     .subtext {
-        font-size: 4.5vw;
+        font-size: 3.25vw;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .subtext {
+        padding-top: 7%;
+    }
+
+    .title {
+        padding-top: 5%;
     }
 }

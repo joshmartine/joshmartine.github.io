@@ -8,5 +8,5 @@ $(window).resize(function () {
 $(document).scroll(function () {
     const distance = $(document).scrollTop();
     const page = Math.floor(distance / windowHeight);
-    $('#' + pages[page]).css({ 'opacity': '1', 'padding-top': '50px' });
+    $('#' + pages[page]).css({ 'opacity': '1', 'padding-top': '1%' });
 });

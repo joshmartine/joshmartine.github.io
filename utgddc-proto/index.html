@@ -5,12 +5,48 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css?v=1">
+    <link rel="stylesheet" href="styles.css">
     <title>Test</title>
 </head>
 
 <body>
-    <div class="container-fluid full" style="background-color: red;">
+
+    <nav class="navbar navbar-expand-lg navbar-fixed-top">
+        <a class="navbar-brand" href="#">UTGDDC</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Game Jams</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Game-making Deathmatch</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Game Development Tools</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <svg id="main" height="400vh" width="100vw" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;" align="center">
+        <rect id="ship" width="50" height="50" x="50%" y="50%" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
+    </svg>
+
+    <div class="container-fluid full">
         <div class="row text-center align-items-center h-100">
             <div class="col">
                 <h1>UTGDDC</h1>
@@ -18,7 +54,7 @@
         </div>
     </div>
 
-    <div class="container-fluid full" style="background-color: blue;">
+    <div class="container-fluid full">
         <div id="section1" class="display row">
             <div class="col-lg-4 title">About Us</div>
             <p class="col-lg-6 subtext">
@@ -35,10 +71,10 @@
         </div>
     </div>
     </div>
-    <div class="container-fluid full" style="background-color: green;">
+    <div class="container-fluid full">
         <div id="section2" class="display row">
             <div class="col-lg-4 title">What we do</div>
-            <p class="col-lg-6 subtext">
+            <p class="col-md-6 subtext">
                 Events we host include: tutorials, discussions, guest speakers, game jams, and competitions (like the
                 annual Game Making
                 Deathmatch). During guest speaker events you can learn from and meet professional developers from a
@@ -47,7 +83,7 @@
             </p>
         </div>
     </div>
-    <div class="container-fluid full" style="background-color: purple;">
+    <div class="container-fluid full">
         <div id="section3" class="display row">
             <div class="col-lg-4 title">Interested?</div>
             <p class="col-lg-6 subtext">

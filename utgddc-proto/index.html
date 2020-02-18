@@ -1,108 +1,141 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
     <title>Test</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <nav class="navbar navbar-expand-lg navbar-fixed-top">
-        <a class="navbar-brand" href="#">UTGDDC</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Game Jams</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Game-making Deathmatch</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Game Development Tools</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
-                </li>
-            </ul>
-        </div>
+      <a class="navbar-brand" href="#">UTGDDC</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"
+              >Home<span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Game Jams</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Game-making Deathmatch</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Game Development Tools</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact Us</a>
+          </li>
+        </ul>
+      </div>
     </nav>
-
-    <svg id="main" height="400vh" width="100vw" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;" align="center">
-        <rect id="ship" width="50" height="50" x="50%" y="50%" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
-    </svg>
-
-    <div class="container-fluid full">
-        <div class="row text-center align-items-center h-100">
-            <div class="col">
-                <h1>UTGDDC</h1>
-            </div>
-        </div>
+    <div class="text-center" style="width:100vw;height:100vh;">
+      <svg
+        id="main"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        style="position:fixed;display:block;margin:auto;"
+        class="ship-container"
+        width="100vw"
+        height="100vh"
+      >
+        <g transform="matrix(1 0 0 -1 -100 -100)">
+          <path
+            id="ship"
+            d="M 0 90
+           A 45 45, 0, 0, 1, 70 90
+           L 35 0 Z"
+          />
+        </g>
+        <g id="ship-g">
+          <use xlink:href="#ship" id="moving_ship" class="ship" />
+        </g>
+      </svg>
     </div>
 
-    <div class="container-fluid full">
-        <div id="section1" class="display row">
-            <div class="col-lg-4 title">About Us</div>
-            <p class="col-lg-6 subtext">
-                The Game Design & Development Club (GDDC) is a recognized student campus group at the University of
-                Toronto on the St.
-                George Campus. The club was formed in the fall of 2003, under the name Game Programming Club (GPC), to
-                attract students
-                with an interest in video games and video game development.
-                <br><br>
-                We’re dedicated to helping people interested in anything related to game design and development such as:
-                programming,
-                sound, music, business, and art.
-            </p>
+    <!-- <div class="container-fluid full" id="section1">
+      <div class="display row">
+        <div class="col-md section">
+          <div class="title">About Us</div>
+          <p class="subtext">
+            The Game Design & Development Club (GDDC) is a recognized student
+            campus group at the University of Toronto on the St. George Campus.
+            The club was formed in the fall of 2003, under the name Game
+            Programming Club (GPC), to attract students with an interest in
+            video games and video game development.
+            <br /><br />
+            We’re dedicated to helping people interested in anything related to
+            game design and development such as: programming, sound, music,
+            business, and art.
+          </p>
         </div>
-    </div>
-    </div>
-    <div class="container-fluid full">
-        <div id="section2" class="display row">
-            <div class="col-lg-4 title">What we do</div>
-            <p class="col-md-6 subtext">
-                Events we host include: tutorials, discussions, guest speakers, game jams, and competitions (like the
-                annual Game Making
-                Deathmatch). During guest speaker events you can learn from and meet professional developers from a
-                variety of
-                backgrounds.
-            </p>
-        </div>
-    </div>
-    <div class="container-fluid full">
-        <div id="section3" class="display row">
-            <div class="col-lg-4 title">Interested?</div>
-            <p class="col-lg-6 subtext">
-                Join our <a href="http://eepurl.com/bNYzJr">mailing list</a> and <a
-                    href="http://www.utgddc.com/discord/">Discord server</a>.
-            </p>
-        </div>
+      </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <div class="container-fluid full" id="section2">
+      <div class="display row">
+        <div class="col-md section">
+          <div class="title">What we do</div>
+          <p class="subtext">
+            Events we host include: tutorials, discussions, guest speakers, game
+            jams, and competitions (like the annual Game Making Deathmatch).
+            During guest speaker events you can learn from and meet professional
+            developers from a variety of backgrounds.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid full" id="section3">
+      <div class="display row">
+        <div class="col-md section">
+          <div class="title">Interested?</div>
+          <p class="subtext">
+            Join our <a href="http://eepurl.com/bNYzJr">mailing list</a> and
+            <a href="http://www.utgddc.com/discord/">Discord server</a>.
+          </p>
+        </div>
+      </div>
+    </div> -->
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
 
     <script src="main.js"></script>
-</body>
-
+  </body>
 </html>

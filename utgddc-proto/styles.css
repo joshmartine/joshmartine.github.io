@@ -1,11 +1,11 @@
 * {
   color: black;
-  /* background: linear-gradient(#000, #000) no-repeat center/2px 100%; */
 }
 
 .navbar {
   background: black;
   z-index: 1;
+  opacity: 0;
 }
 
 .navbar a {
@@ -19,6 +19,40 @@
 }
 
 .full {
+  transition: all 1.5s;
+  opacity: 1;
+}
+
+.section .title {
+  font-weight: 600;
+  font-size: 4em;
+}
+
+.section .subtext {
+  font-size: 1.5em;
+  position: relative;
+  left: 0;
+}
+
+#ship {
+  transform: rotate(90, 50, 50);
+}
+
+.ship-container {
+  position: relative;
+  display: block;
+  margin: auto;
+  border: 3px solid black;
+  width: 100vw;
+  height: 100vh;
+}
+
+#ship-g {
+  transform: translate(50vw, 50vh);
+}
+
+/*
+.full {
   height: 100vh;
   width: 100vw;
 }
@@ -26,41 +60,20 @@
 .display {
   transition: all 1.5s;
   opacity: 0;
-  padding-top: 6%;
-  padding-left: 4%;
+  margin-top: 6%;
+  margin-left: 3%;
 }
 
 .title {
+  margin-top: 2vh;
   font-size: 4em;
   font-weight: 500;
 }
 
 .subtext {
+  margin-top: 16vh;
   font-size: 1.5em;
   font-weight: 250;
-}
-
-@media only screen and (max-width: 768px) {
-  .title {
-    font-size: 6.5vh;
-  }
-
-  .subtext {
-    font-size: 3.25vh;
-  }
-}
-
-@media only screen and (min-width: 1000px) {
-  .subtext {
-    padding-top: 16vh;
-  }
-
-  .title {
-    padding-top: 2vh;
-  }
-
-  .subtext,
-  .title {
-    position: absolute;
-  }
-}
+  position: absolute;
+  width: 90%;
+} */

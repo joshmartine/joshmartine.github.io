@@ -1,88 +1,198 @@
-const pages = ['section1', 'section2', 'section3'];
-let completedPages = [];
-let windowHeight = $(window).height();
+$(() => {
+  let asteroids = [];
+  let bullets = [];
 
-let asteroids = [];
+  // update_asteroids = () => {
+  //   if (asteroids.length < 5) {
+  //     let asteroid = new Asteroid();
+  //     asteroids.push(asteroid);
+  //   }
 
-$(window).resize(function() {
-  windowHeight = $(window).height();
-});
+  //   asteroids.forEach(asteroid => {
+  //     asteroid.update();
+  //   });
 
-$(document).scroll(function() {
-  if (completedPages.length == 3) return;
-  const distance = $(document).scrollTop();
-  const page = Math.floor(distance / windowHeight);
-  $('#' + pages[page]).css({ opacity: '1', 'padding-top': '4vh' });
-  if (!completedPages.includes(pages[page])) {
-    completedPages.push(pages[page]);
-  }
-});
+  //   asteroids
+  //     .filter(asteroid => !asteroid.is_valid())
+  //     .forEach(asteroid => $(`#${asteroid.id}`).remove());
 
-update_asteroids = () => {
-  if (asteroids.length < 5) {
-    let asteroid = new Asteroid();
-    asteroids.push(asteroid);
-  }
+  //   asteroids = asteroids.filter(asteroid => asteroid.is_valid());
+  // };
 
-  asteroids.forEach(asteroid => {
-    asteroid.update();
+  // window.setInterval(update_asteroids, 20);
+
+  update_bullets = () => {
+    bullets.forEach(bullet => {
+      bullet.update();
+    });
+
+    bullets
+      .filter(bullet => !bullet.is_valid())
+      .forEach(bullet => $(`#${bullet.id}`).remove());
+  };
+
+  window.setInterval(update_bullets, 20);
+
+  $(document).on('click', event => {
+    js_ship.fire();
   });
 
-  asteroids
-    .filter(asteroid => !asteroid.is_valid())
-    .forEach(asteroid => $(`#${asteroid.id}`).remove());
+  var mouse = {};
+  $(document).on('mousemove', function(event) {
+    mouse.X = event.pageX;
+    mouse.Y = event.pageY;
+    js_ship.update();
+  });
 
-  asteroids = asteroids.filter(asteroid => asteroid.is_valid());
-};
+  var ship = $('#moving_ship');
 
-window.setInterval(update_asteroids, 20);
+  var prev = { X: null, Y: null };
 
-class Asteroid {
-  constructor() {
-    this.r = 50;
+  class Ship {
+    constructor() {
+      this.svg = $('#moving_ship')[0].getBBox();
+      this.rect = $('#moving_ship')[0].getBoundingClientRect();
+      this.angle = 0;
 
-    this.dir_x = 0.5 + Math.random() * 5;
-    this.dir_y = (Math.random() * 2 - 1) * 5;
-    this.x = 0;
-    this.y = Math.random() * $(window).height() + $(document).scrollTop();
-
-    if (Math.random() > 0.5) {
-      this.x = $(window).width();
-      this.dir_x = -this.dir_x;
+      this.x = $(document).width() / 2 + this.svg.width / 2;
+      this.y = $(document).height() / 2 + this.svg.height / 2;
     }
 
-    this.id = Date.now();
+    fire() {
+      let bullet = new Bullet(
+        -Math.cos(this.angle),
+        -Math.sin(this.angle),
+        (this.rect.left + this.rect.right) / 2,
+        (this.rect.top + this.rect.bottom) / 2
+      );
+      bullets.push(bullet);
+    }
 
-    var svgns = 'http://www.w3.org/2000/svg';
-    var circle = document.createElementNS(svgns, 'circle');
-    circle.setAttributeNS(null, 'cx', this.x);
-    circle.setAttributeNS(null, 'cy', this.y);
-    circle.setAttributeNS(null, 'id', this.id);
-    circle.setAttributeNS(null, 'r', 50);
-    circle.setAttributeNS(
-      null,
-      'style',
-      'fill: none; stroke: blue; stroke-width: 1px;'
-    );
+    update = () => {
+      if (
+        prev.Y != mouse.Y ||
+        (prev.X != mouse.X && (prev.Y != null || prev.X != null))
+      ) {
+        var ship_pos = ship.position();
+        var diff_x = ship_pos.left - mouse.X;
+        var diff_y = ship_pos.top - mouse.Y;
+        var tan = diff_y / diff_x;
 
-    this.img = circle;
+        var atan = (Math.atan(tan) * 180) / Math.PI;
+        atan += 90;
+        if (diff_y > 0 && diff_x > 0) {
+          atan += 180;
+        } else if (diff_y < 0 && diff_x > 0) {
+          atan -= 180;
+        }
 
-    $('#main').append(this.img);
+        this.angle = ((atan + 90) * Math.PI) / 180;
+
+        prev.X = mouse.X;
+        prev.Y = mouse.Y;
+
+        $('#moving_ship').attr('transform', 'rotate(' + atan + ', 50, 50)');
+        this.rect = $('#moving_ship')[0].getBoundingClientRect();
+      }
+    };
   }
 
-  update() {
-    this.x += this.dir_x;
-    this.y += this.dir_y;
-    this.img.setAttributeNS(null, 'cx', this.x);
-    this.img.setAttributeNS(null, 'cy', this.y);
+  class Bullet {
+    constructor(dir_x, dir_y, x, y) {
+      this.r = 2;
+      this.speed = 20;
+
+      this.dir_x = dir_x;
+      this.dir_y = dir_y;
+
+      this.x = x;
+      this.y = y;
+
+      this.id = Date.now();
+
+      var svgns = 'http://www.w3.org/2000/svg';
+      var circle = document.createElementNS(svgns, 'circle');
+      circle.setAttributeNS(null, 'cx', this.x);
+      circle.setAttributeNS(null, 'cy', this.y);
+      circle.setAttributeNS(null, 'id', this.id);
+      circle.setAttributeNS(null, 'r', this.r);
+      circle.setAttributeNS(
+        null,
+        'style',
+        'fill: red; stroke: red; stroke-width: 1px;'
+      );
+
+      this.img = circle;
+
+      $('#main').append(this.img);
+    }
+
+    update() {
+      this.x += this.dir_x * this.speed;
+      this.y += this.dir_y * this.speed;
+      this.img.setAttributeNS(null, 'cx', this.x);
+      this.img.setAttributeNS(null, 'cy', this.y);
+    }
+
+    is_valid() {
+      return (
+        this.x + this.r > 0 &&
+        this.x - this.r < $(window).width() &&
+        this.y + this.r > 0 &&
+        this.y - this.r < $(window).height() + $(document).scrollTop()
+      );
+    }
   }
 
-  is_valid() {
-    return (
-      this.x + this.r > 0 &&
-      this.x - this.r < $(window).width() &&
-      this.y + this.r > 0 &&
-      this.y - this.r < $(window).height() + $(document).scrollTop()
-    );
+  class Asteroid {
+    constructor() {
+      this.r = 50;
+
+      this.dir_x = 0.5 + Math.random() * 5;
+      this.dir_y = (Math.random() * 2 - 1) * 5;
+      this.x = 0;
+      this.y = Math.random() * $(window).height() + $(document).scrollTop();
+
+      if (Math.random() > 0.5) {
+        this.x = $(window).width();
+        this.dir_x = -this.dir_x;
+      }
+
+      this.id = Date.now();
+
+      var svgns = 'http://www.w3.org/2000/svg';
+      var circle = document.createElementNS(svgns, 'circle');
+      circle.setAttributeNS(null, 'cx', this.x);
+      circle.setAttributeNS(null, 'cy', this.y);
+      circle.setAttributeNS(null, 'id', this.id);
+      circle.setAttributeNS(null, 'r', this.r);
+      circle.setAttributeNS(
+        null,
+        'style',
+        'fill: none; stroke: blue; stroke-width: 1px;'
+      );
+
+      this.img = circle;
+
+      $('#main').append(this.img);
+    }
+
+    update() {
+      this.x += this.dir_x;
+      this.y += this.dir_y;
+      this.img.setAttributeNS(null, 'cx', this.x);
+      this.img.setAttributeNS(null, 'cy', this.y);
+    }
+
+    is_valid() {
+      return (
+        this.x + this.r > 0 &&
+        this.x - this.r < $(window).width() &&
+        this.y + this.r > 0 &&
+        this.y - this.r < $(window).height() + $(document).scrollTop()
+      );
+    }
   }
-}
+
+  let js_ship = new Ship();
+});

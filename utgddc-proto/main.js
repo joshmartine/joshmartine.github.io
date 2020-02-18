@@ -2,28 +2,28 @@ $(() => {
   let asteroids = [];
   let bullets = [];
 
-  // update_asteroids = () => {
-  //   if (asteroids.length < 5) {
-  //     let asteroid = new Asteroid();
-  //     asteroids.push(asteroid);
-  //   }
+  update_asteroids = () => {
+    if (asteroids.length < 2) {
+      let asteroid = new Asteroid();
+      asteroids.push(asteroid);
+    }
 
-  //   asteroids.forEach(asteroid => {
-  //     asteroid.update();
-  //   });
+    asteroids.forEach(asteroid => {
+      asteroid.update();
+    });
 
-  //   asteroids
-  //     .filter(asteroid => !asteroid.is_valid())
-  //     .forEach(asteroid => $(`#${asteroid.id}`).remove());
+    asteroids
+      .filter(asteroid => !asteroid.is_valid())
+      .forEach(asteroid => $(`#${asteroid.id}`).remove());
 
-  //   asteroids = asteroids.filter(asteroid => asteroid.is_valid());
-  // };
+    asteroids = asteroids.filter(asteroid => asteroid.is_valid());
+  };
 
-  // window.setInterval(update_asteroids, 20);
+  window.setInterval(update_asteroids, 20);
 
   update_bullets = () => {
     bullets.forEach(bullet => {
-      bullet.update();
+      bullet.update(asteroids);
     });
 
     bullets
@@ -38,9 +38,13 @@ $(() => {
   });
 
   var mouse = {};
-  $(document).on('mousemove', function(event) {
+  $(document).on('mousemove', event => {
     mouse.X = event.pageX;
     mouse.Y = event.pageY;
+    js_ship.update();
+  });
+
+  $(document).on('scroll', event => {
     js_ship.update();
   });
 
@@ -127,11 +131,20 @@ $(() => {
       $('#main').append(this.img);
     }
 
-    update() {
+    update(asteroids) {
       this.x += this.dir_x * this.speed;
       this.y += this.dir_y * this.speed;
       this.img.setAttributeNS(null, 'cx', this.x);
       this.img.setAttributeNS(null, 'cy', this.y);
+
+      asteroids.forEach(asteroid => {
+        let x = asteroid.x - this.x;
+        let y = asteroid.y - this.y;
+
+        if (Math.sqrt(x * x + y * y) < asteroid.r) {
+          asteroid.valid = false;
+        }
+      });
     }
 
     is_valid() {
@@ -152,6 +165,8 @@ $(() => {
       this.dir_y = (Math.random() * 2 - 1) * 5;
       this.x = 0;
       this.y = Math.random() * $(window).height() + $(document).scrollTop();
+
+      this.valid = true;
 
       if (Math.random() > 0.5) {
         this.x = $(window).width();
@@ -189,7 +204,8 @@ $(() => {
         this.x + this.r > 0 &&
         this.x - this.r < $(window).width() &&
         this.y + this.r > 0 &&
-        this.y - this.r < $(window).height() + $(document).scrollTop()
+        this.y - this.r < $(window).height() + $(document).scrollTop() &&
+        this.valid
       );
     }
   }

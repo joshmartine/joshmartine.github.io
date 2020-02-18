@@ -52,31 +52,29 @@
         </ul>
       </div>
     </nav>
-    <div class="text-center" style="width:100vw;height:100vh;">
-      <svg
-        id="main"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        style="position:fixed;display:block;margin:auto;"
-        class="ship-container"
-        width="100vw"
-        height="100vh"
-      >
-        <g transform="matrix(1 0 0 -1 -100 -100)">
-          <path
-            id="ship"
-            d="M 0 90
+
+    <svg
+      id="main"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      class="ship-container"
+      width="100vw"
+      height="100vh"
+    >
+      <g transform="matrix(1 0 0 -1 -100 -100)">
+        <path
+          id="ship"
+          d="M 0 90
            A 45 45, 0, 0, 1, 70 90
            L 35 0 Z"
-          />
-        </g>
-        <g id="ship-g">
-          <use xlink:href="#ship" id="moving_ship" class="ship" />
-        </g>
-      </svg>
-    </div>
+        />
+      </g>
+      <g id="ship-g">
+        <use xlink:href="#ship" id="moving_ship" class="ship" />
+      </g>
+    </svg>
 
-    <!-- <div class="container-fluid full" id="section1">
+    <div class="container-fluid full" id="section1">
       <div class="display row">
         <div class="col-md section">
           <div class="title">About Us</div>
@@ -118,7 +116,7 @@
           </p>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"

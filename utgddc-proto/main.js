@@ -3,7 +3,7 @@ $(() => {
   let bullets = [];
 
   update_asteroids = () => {
-    if (asteroids.length < 2) {
+    if (asteroids.length < 5) {
       let asteroid = new Asteroid();
       asteroids.push(asteroid);
     }
@@ -161,7 +161,7 @@ $(() => {
 
   class Asteroid {
     constructor() {
-      this.r = 50;
+      this.r = $(document).width() / 10;
 
       this.dir_x = 0.5 + Math.random() * 5;
       this.dir_y = (Math.random() * 2 - 1) * 5;

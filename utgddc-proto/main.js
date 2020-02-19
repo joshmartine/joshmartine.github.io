@@ -72,12 +72,12 @@ $(() => {
       bullets.push(bullet);
     }
 
-    update = () => {
+    update() {
       if (
         prev.Y != mouse.Y ||
         (prev.X != mouse.X && (prev.Y != null || prev.X != null))
       ) {
-        var ship_pos = ship.position();
+        var ship_pos = $('#moving_ship')[0].getBoundingClientRect();
         var diff_x = ship_pos.left - mouse.X;
         var diff_y = ship_pos.top - mouse.Y;
         var tan = diff_y / diff_x;
@@ -92,13 +92,15 @@ $(() => {
 
         this.angle = ((atan + 90) * Math.PI) / 180;
 
+        console.log(ship[0].getBoundingClientRect());
+
         prev.X = mouse.X;
         prev.Y = mouse.Y;
 
         $('#moving_ship').attr('transform', 'rotate(' + atan + ', 50, 50)');
         this.rect = $('#moving_ship')[0].getBoundingClientRect();
       }
-    };
+    }
   }
 
   class Bullet {
